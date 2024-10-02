@@ -1,11 +1,18 @@
 import React from "react";
 import { styles } from './style';
-import { View, Text } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 
 export function HomePage() {
   return (
     <View style={styles.container}>
-        <Text>Home</Text>
+      <View style={styles.content}>
+        <Image style={styles.img} source={require("../../../assets/quiz.png")} />
+      </View>
+      <View style={styles.content}>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.text}>START</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
