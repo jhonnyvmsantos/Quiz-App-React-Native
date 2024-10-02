@@ -1,3 +1,4 @@
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { HomePage } from '../pages/Home';
@@ -5,8 +6,24 @@ import { CrudPage } from '../pages/Crud';
 import { GamePage } from '../pages/Game';
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-export function TabsRoutes() {
+
+
+export function StackRoutes() {
+  return (
+    <Stack.Navigator
+      initialRouteName='Tabs'
+      screenOptions={{
+        headerShown: false
+      }}
+    >
+      <Stack.Screen name="Tabs" component={TabsRoutes} />
+    </Stack.Navigator>
+  );
+}
+
+function TabsRoutes() {
   return (
     <Tab.Navigator
       initialRouteName='Home'
