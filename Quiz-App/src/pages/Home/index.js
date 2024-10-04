@@ -10,7 +10,11 @@ export function HomePage() {
       </View>
       <View style={styles.content}>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.text}>START</Text>
+          <Text style={styles.text}>CASUAL</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={[styles.button, {backgroundColor: "black"}]}>
+          <Text style={[styles.text, {color: "white"}]}>GITHUB</Text>
         </TouchableOpacity>
       </View>
     </View>

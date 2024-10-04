@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingHorizontal: 15
     },
     content: {
         width: "100%",
@@ -24,11 +25,12 @@ export const styles = StyleSheet.create({
         resizeMode: "contain"
     },
     button: {
+        margin: 10,
         width: "70%",
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "cyan",
-        padding: 10,
+        padding: 12.5,
         borderRadius: 10
     }
 })
