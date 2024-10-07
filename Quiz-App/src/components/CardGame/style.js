@@ -2,18 +2,24 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
-        width: "60%",
-        height: "27%",
+        minWidth: 225,
+        width: 275,
+        maxWidth: "90%",
         padding: 15,
         borderStyle: "solid",
         borderRadius: 20,
         borderWidth: 2,
         alignItems: "center",
         justifyContent: "space-between",
+        gap: 20
     },
     img: { 
-        width: "90%",
-        height: "85%",
+        width: 200,
+        height: 200,
         resizeMode: "contain"
+    },
+    title: {
+        fontSize: 17.5,
+        fontWeight: "bold"
     }
 })

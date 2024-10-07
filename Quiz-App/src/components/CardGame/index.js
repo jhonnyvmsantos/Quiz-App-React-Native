@@ -1,12 +1,12 @@
 import React from "react";
 import { styles } from './style';
-import { View, Text, Image } from "react-native";
+import { Text, Image, TouchableOpacity } from "react-native";
 
-export function CardGame({ img }) {
+export function CardGame({ img, place, text }) {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={[styles.container, {alignSelf: place}]}>
       <Image source={img} style={styles.img} />
-      <Text>CARD</Text>
-    </View>
+      <Text style={styles.title}>{text}</Text>
+    </TouchableOpacity>
   );
 }
