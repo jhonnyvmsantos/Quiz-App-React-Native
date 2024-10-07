@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
         minWidth: 225,
         width: 275,
         maxWidth: "90%",
-        padding: 15,
+        padding: 20,
         borderStyle: "solid",
         borderRadius: 20,
         borderWidth: 2,

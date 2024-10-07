@@ -1,10 +1,10 @@
 import { styles } from './style';
-import { View, Text } from "react-native";
+import { Text, Image, View } from "react-native";
 
-export function CrudPage() {
+export function QuizItem() {
   return (
     <View style={styles.container}>
-        <Text>Crud</Text>
+
     </View>
   );
 }
