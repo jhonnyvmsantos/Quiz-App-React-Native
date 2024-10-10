@@ -1,22 +1,25 @@
 import { styles } from './style';
-import { View, Modal, Text, Pressable } from "react-native";
+import { View, Modal, Text, TouchableOpacity } from "react-native";
 
-export function SimpleModal({ visible, close }) {
+export function SimpleModal({ visible, close, display }) {
+
     return (
         <View style={styles.container}>
             <Modal
                 animationType="fade"
                 transparent={true}
                 visible={visible}
-                onRequestClose={close}>
+                onRequestClose={close}
+            >
                 <View style={styles.container}>
-                    <View style={styles.modalView}>
-                        <Text style={styles.modalText}>Hello World!</Text>
-                        <Pressable
+                    <View style={styles.content}>
+                        <Text style={styles.text}>Hello World!</Text>
+                        <TouchableOpacity
                             style={styles.button}
-                            onPress={close}>
-                            <Text numberOfLines={1} style={styles.textStyle}>CLOSE</Text>
-                        </Pressable>
+                            onPress={close}
+                        >
+                            <Text numberOfLines={1} style={styles.buttonText}>CLOSE</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Modal>

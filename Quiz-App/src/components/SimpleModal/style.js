@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    modalView: {
+    content: {
         width: "80%",
         backgroundColor: 'white',
         borderRadius: 20,
@@ -28,14 +28,14 @@ export const styles = StyleSheet.create({
         elevation: 2,
         backgroundColor: '#2196F3',
     },
-    textStyle: {
+    text: {
+        marginBottom: 15,
+        textAlign: 'center',
+    },
+    buttonText: {
         color: 'white',
         fontWeight: 'bold',
         textAlign: 'center',
         overflow: "hidden"
-    },
-    modalText: {
-        marginBottom: 15,
-        textAlign: 'center',
     }
 })
