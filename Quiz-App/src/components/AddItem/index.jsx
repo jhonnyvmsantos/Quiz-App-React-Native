@@ -3,6 +3,7 @@ import { styles } from "./style";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Entry } from '../Entry';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { db } from '../../database';
 
 export function AddItem() {
     const [visible, setVisible] = React.useState(false);
@@ -25,6 +26,15 @@ export function AddItem() {
         setVisible(!visible)
     }
 
+    const test = () => db.withExclusiveTransactionAsync(async (txn) => {   
+        const dt = await txn.getAllAsync("SELECT * FROM tbl_question;")
+    });
+
+    const createItemQuiz = () => db.withExclusiveTransactionAsync(async (txn) => {   
+        txn.execAsync(`INSERT INTO tbl_question (title, question_text, correctly_alt, alt_A, alt_B, alt_C) VALUES ('${data.title}', '${data.question}', '${data.answer}', '${data.altA}', '${data.altB}', '${data.altC}');`);
+        console.log("Item Quiz Create");
+    });
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>ITEM FORM</Text>
@@ -33,10 +43,10 @@ export function AddItem() {
                 <Entry text="ALTERNATIVE (2)" name="altB" value={data.altB} changeValue={(name, value) => changeData(name, value)} />
                 <Entry text="ALTERNATIVE (3)" name="altC" value={data.altC} changeValue={(name, value) => changeData(name, value)} />
                 <View style={styles.btnContainer}>
-                    <TouchableOpacity style={{width: "auto"}}onPress={visibleSwitch}>
+                    <TouchableOpacity style={{ width: "auto" }} onPress={visibleSwitch}>
                         <Ionicons name="arrow-back-circle-outline" size={30} color="black" />
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.button, {flex: 0.8}]}>
+                    <TouchableOpacity style={[styles.button, { flex: 0.8 }]} onPress={createItemQuiz}>
                         <Text numberOfLines={1} style={styles.btnText}>CREATE</Text>
                     </TouchableOpacity>
                 </View>

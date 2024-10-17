@@ -1,8 +1,10 @@
 import * as SQLite from 'expo-sqlite';
 
-const db = SQLite.openDatabaseSync('quiz.db');
+export const db = SQLite.openDatabaseSync('quiz.db');
 
 export const playground = () => db.withExclusiveTransactionAsync(async (txn) => {
+    // await txn.execAsync('DROP TABLE IF EXISTS tbl_question;');
+
     await txn.execAsync(`
         CREATE TABLE IF NOT EXISTS tbl_question (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -11,8 +13,7 @@ export const playground = () => db.withExclusiveTransactionAsync(async (txn) => 
             correctly_alt TEXT NOT NULL, 
             alt_A TEXT NOT NULL, 
             alt_B TEXT NOT NULL, 
-            alt_C TEXT NOT NULL,
-            difficulty INTEGER NOT NULL
+            alt_C TEXT NOT NULL
         );
     `)
 });
