@@ -19,9 +19,29 @@ export const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
   },
-  modalView: {
+  modalContainer: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
+  modalContent: {
+    width: "90%",
+    backgroundColor: "#fff",
+    borderRadius: 20,
+    padding: 40,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalCloseBtn: {
+    position: "absolute",
+    alignSelf: "flex-end",
+    right: 10,
+    top: 10
+  }
 });

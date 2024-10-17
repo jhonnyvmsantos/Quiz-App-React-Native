@@ -11,7 +11,8 @@ export const playground = () => db.withExclusiveTransactionAsync(async (txn) => 
             correctly_alt TEXT NOT NULL, 
             alt_A TEXT NOT NULL, 
             alt_B TEXT NOT NULL, 
-            alt_C TEXT NOT NULL
+            alt_C TEXT NOT NULL,
+            difficulty INTEGER NOT NULL
         );
     `)
 });

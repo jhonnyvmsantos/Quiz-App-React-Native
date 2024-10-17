@@ -2,6 +2,7 @@ import * as React from 'react';
 import { styles } from "./style";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Entry } from '../Entry';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 export function AddItem() {
     const [visible, setVisible] = React.useState(false);
@@ -20,18 +21,33 @@ export function AddItem() {
         console.log(data)
     }
 
+    const visibleSwitch = () => {
+        setVisible(!visible)
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>ITEM FORM</Text>
             {visible ? <>
-                    <Entry text="ALTERNATIVE (1)" name="altA" value={data.altA} changeValue={(name, value) => changeData(name, value)} />
-                    <Entry text="ALTERNATIVE (1)" name="altB" value={data.altB} changeValue={(name, value) => changeData(name, value)} />
-                    <Entry text="ALTERNATIVE (1)" name="altC" value={data.altC} changeValue={(name, value) => changeData(name, value)} />
-                </> : <>
-                    <Entry text="TITLE" name="title" value={data.title} changeValue={(name, value) => changeData(name, value)} />
-                    <Entry text="QUESTION TEXT" name="question" value={data.question} changeValue={(name, value) => changeData(name, value)} />
-                    <Entry text="QUESTION ANSWER" name="answer" value={data.answer} changeValue={(name, value) => changeData(name, value)} />
-                </>
+                <Entry text="ALTERNATIVE (1)" name="altA" value={data.altA} changeValue={(name, value) => changeData(name, value)} />
+                <Entry text="ALTERNATIVE (2)" name="altB" value={data.altB} changeValue={(name, value) => changeData(name, value)} />
+                <Entry text="ALTERNATIVE (3)" name="altC" value={data.altC} changeValue={(name, value) => changeData(name, value)} />
+                <View style={styles.btnContainer}>
+                    <TouchableOpacity style={{width: "auto"}}onPress={visibleSwitch}>
+                        <Ionicons name="arrow-back-circle-outline" size={30} color="black" />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.button, {flex: 0.8}]}>
+                        <Text numberOfLines={1} style={styles.btnText}>CREATE</Text>
+                    </TouchableOpacity>
+                </View>
+            </> : <>
+                <Entry text="TITLE" name="title" value={data.title} changeValue={(name, value) => changeData(name, value)} />
+                <Entry text="QUESTION TEXT" name="question" value={data.question} changeValue={(name, value) => changeData(name, value)} />
+                <Entry text="QUESTION ANSWER" name="answer" value={data.answer} changeValue={(name, value) => changeData(name, value)} />
+                <TouchableOpacity style={styles.button} onPress={visibleSwitch}>
+                    <Text numberOfLines={1} style={styles.btnText}>NEXT STEP</Text>
+                </TouchableOpacity>
+            </>
             }
         </View>
     )

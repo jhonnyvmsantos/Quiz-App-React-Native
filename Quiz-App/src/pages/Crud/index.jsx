@@ -3,6 +3,7 @@ import { QuizItem } from "../../components/QuizItem";
 import { styles } from "./style";
 import { View, Text, ScrollView, TouchableOpacity, Modal } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { AddItem } from "../../components/AddItem";
 
 export function CrudPage() {
@@ -35,8 +36,13 @@ export function CrudPage() {
         visible={modalVisible}
         onRequestClose={visibleSwitch}
       >
-        <View style={styles.modalView}>
-          <AddItem />
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <TouchableOpacity style={styles.modalCloseBtn} onPress={visibleSwitch}>
+              <MaterialCommunityIcons name="close-circle-outline" size={30} color="black" />
+            </TouchableOpacity>
+            <AddItem/>
+          </View>
         </View>
       </Modal>
     </View>
