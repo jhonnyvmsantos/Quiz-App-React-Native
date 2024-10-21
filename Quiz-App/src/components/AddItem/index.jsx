@@ -5,7 +5,7 @@ import { Entry } from '../Entry';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { db } from '../../database';
 
-export function AddItem() {
+export function AddItem({finish}) {
     const [visible, setVisible] = React.useState(false);
     const [data, setData] = React.useState({
         id: '',
@@ -19,20 +19,16 @@ export function AddItem() {
 
     const changeData = (name, value) => {
         setData({ ...data, [name]: value })
-        console.log(data)
     }
 
     const visibleSwitch = () => {
         setVisible(!visible)
     }
 
-    const test = () => db.withExclusiveTransactionAsync(async (txn) => {   
-        const dt = await txn.getAllAsync("SELECT * FROM tbl_question;")
-    });
-
     const createItemQuiz = () => db.withExclusiveTransactionAsync(async (txn) => {   
         txn.execAsync(`INSERT INTO tbl_question (title, question_text, correctly_alt, alt_A, alt_B, alt_C) VALUES ('${data.title}', '${data.question}', '${data.answer}', '${data.altA}', '${data.altB}', '${data.altC}');`);
-        console.log("Item Quiz Create");
+        console.warn("Item Quiz Create");
+        finish();
     });
 
     return (

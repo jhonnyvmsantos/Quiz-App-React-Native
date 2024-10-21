@@ -11,6 +11,11 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 15,
   },
+  iconContent: {
+    flexDirection: "row",
+    width: "auto",
+    gap: 10
+  },
   scrollContent: {
     paddingVertical: 13,
     gap: 20,

@@ -2,7 +2,7 @@ import { styles } from './style';
 import { TouchableOpacity, View, Text } from "react-native";
 import Feather from '@expo/vector-icons/Feather';
 
-export function QuizItem({ text, edit }) {
+export function QuizItem({ text, edit, pressing }) {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.item}>
