@@ -8,6 +8,7 @@ import { AddItem } from "../../components/AddItem";
 import { db } from "../../database";
 
 export function CrudPage() {
+  const [reflesh, setReflesh] = React.useState(false);
   const [modalVisible, setModalVisible] = React.useState(false);
   const [items, setItems] = React.useState([]);
 
@@ -18,13 +19,13 @@ export function CrudPage() {
   const getQuizItems = () => db.withExclusiveTransactionAsync(async (txn) => {
     const dt = await txn.getAllAsync("SELECT * FROM tbl_question;")
     if (dt !== items) {
-      setItems(dt)
+      setItems(dt);
     }
   });
 
   React.useEffect(() => {
     getQuizItems();
-  }, []);
+  }, [reflesh]);
 
   return (
     <View style={styles.container}>
@@ -47,7 +48,7 @@ export function CrudPage() {
       >
         {items.length > 0 && (
           <>
-            {items.map((e, i) => <QuizItem key={i} text={e.title} edit={true} />)}
+            {items.map((e, i) => <QuizItem reflesh={() => setReflesh(!reflesh)} key={i} text={e.title} edit={true} id={e.id}/>)}
           </>
         )}
       </ScrollView>
