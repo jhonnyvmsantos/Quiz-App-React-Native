@@ -25,11 +25,16 @@ export function AddItem({finish}) {
         setVisible(!visible)
     }
 
-    const createItemQuiz = () => db.withExclusiveTransactionAsync(async (txn) => {   
-        txn.execAsync(`INSERT INTO tbl_question (title, question_text, correctly_alt, alt_A, alt_B, alt_C) VALUES ('${data.title}', '${data.question}', '${data.answer}', '${data.altA}', '${data.altB}', '${data.altC}');`);
-        console.warn("Item Quiz Create");
-        finish();
-    });
+    const createItemQuiz = async () => {
+        db.execAsync(`INSERT INTO tbl_question (title, question_text, correctly_alt, alt_A, alt_B, alt_C) VALUES ('${data.title}', '${data.question}', '${data.answer}', '${data.altA}', '${data.altB}', '${data.altC}');`)
+        .then(() => {
+            console.warn("Item Quiz Create.");
+            finish();
+        })
+        .catch(() => {
+            console.warn("Error Creating Quiz Item.");
+        })
+    };
 
     return (
         <View style={styles.container}>

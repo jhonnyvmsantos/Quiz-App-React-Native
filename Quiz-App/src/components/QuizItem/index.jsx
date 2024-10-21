@@ -6,7 +6,7 @@ export function QuizItem({ text, edit, pressing }) {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.item}>
-        <Text style={styles.title}>Item</Text>
+        <Text style={styles.title}>{text}</Text>
       </TouchableOpacity>
 
       {edit && (

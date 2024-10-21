@@ -3,8 +3,6 @@ import * as SQLite from 'expo-sqlite';
 export const db = SQLite.openDatabaseSync('quiz.db');
 
 export const playground = () => db.withExclusiveTransactionAsync(async (txn) => {
-    // await txn.execAsync('DROP TABLE IF EXISTS tbl_question;');
-
     await txn.execAsync(`
         CREATE TABLE IF NOT EXISTS tbl_question (
             id INTEGER PRIMARY KEY AUTOINCREMENT,

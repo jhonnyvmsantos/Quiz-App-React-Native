@@ -17,12 +17,13 @@ export function CrudPage() {
 
   const getQuizItems = () => db.withExclusiveTransactionAsync(async (txn) => {
     const dt = await txn.getAllAsync("SELECT * FROM tbl_question;")
-    setItems(dt)
+    if (dt !== items) {
+      setItems(dt)
+    }
   });
 
   React.useEffect(() => {
     getQuizItems();
-    console.log(items);
   }, []);
 
   return (
@@ -44,7 +45,11 @@ export function CrudPage() {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
-        <QuizItem edit={true}/>
+        {items.length > 0 && (
+          <>
+            {items.map((e, i) => <QuizItem key={i} text={e.title} edit={true} />)}
+          </>
+        )}
       </ScrollView>
 
       <Modal
@@ -58,7 +63,10 @@ export function CrudPage() {
             <TouchableOpacity style={styles.modalCloseBtn} onPress={visibleSwitch}>
               <MaterialCommunityIcons name="close-circle-outline" size={30} color="black" />
             </TouchableOpacity>
-            <AddItem finish={visibleSwitch}/>
+            <AddItem finish={() => {
+              visibleSwitch();
+              getQuizItems();
+            }} />
           </View>
         </View>
       </Modal>
