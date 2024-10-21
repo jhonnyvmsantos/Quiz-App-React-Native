@@ -26,7 +26,7 @@ export function AddItem({finish}) {
     }
 
     const createItemQuiz = async () => {
-        db.execAsync(`INSERT INTO tbl_question (title, question_text, correctly_alt, alt_A, alt_B, alt_C) VALUES ('${data.title}', '${data.question}', '${data.answer}', '${data.altA}', '${data.altB}', '${data.altC}');`)
+        db.runAsync(`INSERT INTO tbl_question (title, question_text, correctly_alt, alt_A, alt_B, alt_C) VALUES (?, ?, ?, ?, ?, ?)`, [data.title, data.question, data.answer, data.altA, data.altB, data.altC])
         .then(() => {
             console.warn("Item Quiz Create.");
             finish();

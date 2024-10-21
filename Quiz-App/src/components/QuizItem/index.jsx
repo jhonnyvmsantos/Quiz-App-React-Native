@@ -6,7 +6,7 @@ import { db } from '../../database';
 export function QuizItem({ text, edit, id, reflesh }) {
 
   const deleteItemQuiz = () => {
-    db.runAsync('DELETE FROM tbl_question WHERE id = $value', { $value: id })
+    db.runAsync('DELETE FROM tbl_question WHERE id = ?', id)
       .then(() => {
         console.warn("Item Quiz Delete.");
         reflesh()

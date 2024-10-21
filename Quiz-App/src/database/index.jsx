@@ -2,8 +2,8 @@ import * as SQLite from 'expo-sqlite';
 
 export const db = SQLite.openDatabaseSync('quiz.db');
 
-export const playground = () => db.withExclusiveTransactionAsync(async (txn) => {
-    await txn.execAsync(`
+export const playground = async () => {
+    db.execAsync(`
         CREATE TABLE IF NOT EXISTS tbl_question (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
@@ -13,5 +13,9 @@ export const playground = () => db.withExclusiveTransactionAsync(async (txn) => 
             alt_B TEXT NOT NULL, 
             alt_C TEXT NOT NULL
         );
-    `)
-});
+    `).then(() => {
+        console.log("Database Create.")
+    }).catch(() => {
+        console.warn("Error Creating Database.")
+    })
+};

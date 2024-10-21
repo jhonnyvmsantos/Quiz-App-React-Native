@@ -16,12 +16,12 @@ export function CrudPage() {
     setModalVisible(!modalVisible);
   };
 
-  const getQuizItems = () => db.withExclusiveTransactionAsync(async (txn) => {
-    const dt = await txn.getAllAsync("SELECT * FROM tbl_question;")
+  const getQuizItems = async () => {
+    const dt = await db.getAllAsync("SELECT * FROM tbl_question;")
     if (dt !== items) {
       setItems(dt);
     }
-  });
+  };
 
   React.useEffect(() => {
     getQuizItems();
@@ -48,7 +48,7 @@ export function CrudPage() {
       >
         {items.length > 0 && (
           <>
-            {items.map((e, i) => <QuizItem reflesh={() => setReflesh(!reflesh)} key={i} text={e.title} edit={true} id={e.id}/>)}
+            {items.map((e, i) => <QuizItem reflesh={() => setReflesh(!reflesh)} key={i} text={e.title} edit={true} id={e.id} />)}
           </>
         )}
       </ScrollView>
