@@ -40,6 +40,17 @@ export function ItemForm({ finish, item }) {
             })
     };
 
+    const updateItemQuiz = async () => {
+        db.runAsync(`UPDATE tbl_question SET title = ?, question_text = ?, correctly_alt = ?, alt_A = ?, alt_B = ?, alt_C = ? WHERE id = ?`, [data.title, data.question, data.answer, data.altA, data.altB, data.altC, data.id])
+            .then(() => {
+                console.warn("Item Quiz Update.");
+                finish();
+            })
+            .catch(() => {
+                console.warn("Error Updating Quiz Item.");
+            })
+    };
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>ITEM FORM</Text>
@@ -51,7 +62,13 @@ export function ItemForm({ finish, item }) {
                     <TouchableOpacity style={{ width: "auto" }} onPress={visibleSwitch}>
                         <Ionicons name="arrow-back-circle-outline" size={30} color="black" />
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.button, { flex: 0.8 }]} onPress={createItemQuiz}>
+                    <TouchableOpacity style={[styles.button, { flex: 0.8 }]} onPress={() => {
+                        if (data.id !== undefined) {
+                            updateItemQuiz();
+                        } else {
+                            createItemQuiz();
+                        }
+                    }}>
                         <Text numberOfLines={1} style={styles.btnText}>{item.id ? "UPDATE" : "CREATE"}</Text>
                     </TouchableOpacity>
                 </View>

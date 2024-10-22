@@ -13,7 +13,6 @@ export function CrudPage() {
   const [edit, setEdit] = React.useState({});
   const [enabled, setEnabled] = React.useState({
     reflesh: false,
-    itemEditing: false,
     mVisible: false
   })
 
@@ -24,9 +23,6 @@ export function CrudPage() {
         break;
       case "reflesh":
         setEnabled({ ...enabled, reflesh: !enabled.reflesh })
-        break;
-      case "itemEditing":
-        setEnabled({ ...enabled, itemEditing: !enabled.itemEditing });
         break;
     }
   };
@@ -69,7 +65,6 @@ export function CrudPage() {
             {items.map((e, i) => <QuizItem key={i} text={e.title} edit={true} id={e.id}
               reflesh={() => switchEnabled("reflesh")}
               pressing={() => {
-                switchEnabled("itemEditing");
                 setEdit(e);
                 switchEnabled("mVisible");
               }} />
