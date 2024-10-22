@@ -4,28 +4,43 @@ import { styles } from "./style";
 import { View, Text, ScrollView, TouchableOpacity, Modal } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { AddItem } from "../../components/AddItem";
+import { ItemForm } from "../../components/ItemForm";
 import { db } from "../../database";
 
 export function CrudPage() {
-  const [reflesh, setReflesh] = React.useState(false);
-  const [modalVisible, setModalVisible] = React.useState(false);
-  const [items, setItems] = React.useState([]);
 
-  const visibleSwitch = () => {
-    setModalVisible(!modalVisible);
+  const [items, setItems] = React.useState([]);
+  const [edit, setEdit] = React.useState({});
+  const [enabled, setEnabled] = React.useState({
+    reflesh: false,
+    itemEditing: false,
+    mVisible: false
+  })
+
+  const switchEnabled = (type) => {
+    switch (type) {
+      case "mVisible":
+        setEnabled({ ...enabled, mVisible: !enabled.mVisible });
+        break;
+      case "reflesh":
+        setEnabled({ ...enabled, reflesh: !enabled.reflesh })
+        break;
+      case "itemEditing":
+        setEnabled({ ...enabled, itemEditing: !enabled.itemEditing });
+        break;
+    }
   };
 
   const getQuizItems = async () => {
-    const dt = await db.getAllAsync("SELECT * FROM tbl_question;")
-    if (dt !== items) {
-      setItems(dt);
+    const data = await db.getAllAsync("SELECT * FROM tbl_question;")
+    if (data !== items) {
+      setItems(data);
     }
   };
 
   React.useEffect(() => {
     getQuizItems();
-  }, [reflesh]);
+  }, [enabled.reflesh]);
 
   return (
     <View style={styles.container}>
@@ -35,7 +50,10 @@ export function CrudPage() {
           <TouchableOpacity onPress={getQuizItems}>
             <MaterialCommunityIcons name="reload" size={30} color="black" />
           </TouchableOpacity>
-          <TouchableOpacity onPress={visibleSwitch}>
+          <TouchableOpacity onPress={() => {
+            switchEnabled("mVisible");
+            setEdit({});
+          }}>
             <Feather name="plus-circle" size={30} color="black" />
           </TouchableOpacity>
         </View>
@@ -48,7 +66,14 @@ export function CrudPage() {
       >
         {items.length > 0 && (
           <>
-            {items.map((e, i) => <QuizItem reflesh={() => setReflesh(!reflesh)} key={i} text={e.title} edit={true} id={e.id} />)}
+            {items.map((e, i) => <QuizItem key={i} text={e.title} edit={true} id={e.id}
+              reflesh={() => switchEnabled("reflesh")}
+              pressing={() => {
+                switchEnabled("itemEditing");
+                setEdit(e);
+                switchEnabled("mVisible");
+              }} />
+            )}
           </>
         )}
       </ScrollView>
@@ -56,16 +81,16 @@ export function CrudPage() {
       <Modal
         animationType="fade"
         transparent={true}
-        visible={modalVisible}
-        onRequestClose={visibleSwitch}
+        visible={enabled.mVisible}
+        onRequestClose={() => switchEnabled("mVisible")}
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <TouchableOpacity style={styles.modalCloseBtn} onPress={visibleSwitch}>
+            <TouchableOpacity style={styles.modalCloseBtn} onPress={() => switchEnabled("mVisible")}>
               <MaterialCommunityIcons name="close-circle-outline" size={30} color="black" />
             </TouchableOpacity>
-            <AddItem finish={() => {
-              visibleSwitch();
+            <ItemForm item={edit} finish={() => {
+              switchEnabled("mVisible");
               getQuizItems();
             }} />
           </View>

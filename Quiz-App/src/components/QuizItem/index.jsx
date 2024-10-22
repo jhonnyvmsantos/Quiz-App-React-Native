@@ -3,7 +3,7 @@ import { TouchableOpacity, View, Text } from "react-native";
 import Feather from '@expo/vector-icons/Feather';
 import { db } from '../../database';
 
-export function QuizItem({ text, edit, id, reflesh }) {
+export function QuizItem({ text, edit, id, reflesh, pressing }) {
 
   const deleteItemQuiz = () => {
     db.runAsync('DELETE FROM tbl_question WHERE id = ?', id)
@@ -18,13 +18,13 @@ export function QuizItem({ text, edit, id, reflesh }) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.item}>
+      <View style={styles.item}>
         <Text style={styles.title}>{text}</Text>
-      </TouchableOpacity>
+      </View>
 
       {edit && (
         <View style={styles.buttons}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={pressing}>
             <Feather name="edit" size={24} color="black" />
           </TouchableOpacity>
           <TouchableOpacity onPress={deleteItemQuiz}>

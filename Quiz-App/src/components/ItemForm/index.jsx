@@ -5,17 +5,9 @@ import { Entry } from '../Entry';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { db } from '../../database';
 
-export function AddItem({finish}) {
+export function ItemForm({ finish, item }) {
     const [visible, setVisible] = React.useState(false);
-    const [data, setData] = React.useState({
-        id: '',
-        title: '',
-        question: '',
-        answer: '',
-        altA: '',
-        altB: '',
-        altC: ''
-    })
+    const [data, setData] = React.useState({})
 
     const changeData = (name, value) => {
         setData({ ...data, [name]: value })
@@ -25,15 +17,27 @@ export function AddItem({finish}) {
         setVisible(!visible)
     }
 
+    React.useEffect(() => {
+        setData({
+            id: item.id,
+            title: item.title,
+            question: item.question_text,
+            answer: item.correctly_alt,
+            altA: item.alt_A,
+            altB: item.alt_B,
+            altC: item.alt_C
+        })
+    }, [item]);
+
     const createItemQuiz = async () => {
         db.runAsync(`INSERT INTO tbl_question (title, question_text, correctly_alt, alt_A, alt_B, alt_C) VALUES (?, ?, ?, ?, ?, ?)`, [data.title, data.question, data.answer, data.altA, data.altB, data.altC])
-        .then(() => {
-            console.warn("Item Quiz Create.");
-            finish();
-        })
-        .catch(() => {
-            console.warn("Error Creating Quiz Item.");
-        })
+            .then(() => {
+                console.warn("Item Quiz Create.");
+                finish();
+            })
+            .catch(() => {
+                console.warn("Error Creating Quiz Item.");
+            })
     };
 
     return (
@@ -48,7 +52,7 @@ export function AddItem({finish}) {
                         <Ionicons name="arrow-back-circle-outline" size={30} color="black" />
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.button, { flex: 0.8 }]} onPress={createItemQuiz}>
-                        <Text numberOfLines={1} style={styles.btnText}>CREATE</Text>
+                        <Text numberOfLines={1} style={styles.btnText}>{item.id ? "UPDATE" : "CREATE"}</Text>
                     </TouchableOpacity>
                 </View>
             </> : <>
