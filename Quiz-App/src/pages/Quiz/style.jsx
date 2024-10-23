@@ -15,6 +15,12 @@ export const styles = StyleSheet.create({
         width: "100%",
         backgroundColor: '#fff',
         borderWidth: 0.5,
-        borderRadius: 16
+        borderRadius: 16,
+        justifyContent: "center",
+        alignItems: "center"
     },
+    scrollContent: {
+        padding: 10,
+        gap: 20,
+    }
 })
