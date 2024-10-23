@@ -1,15 +1,19 @@
 import React from "react";
 import { styles } from './style';
 import { View, Text, Image, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export function HomePage() {
+
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <Image style={styles.img} source={require("../../../assets/quiz.png")} />
       </View>
       <View style={styles.content}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Quiz")}>
           <Text style={styles.text}>CASUAL</Text>
         </TouchableOpacity>
 

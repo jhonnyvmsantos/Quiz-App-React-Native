@@ -4,11 +4,10 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { HomePage } from '../pages/Home';
 import { CrudPage } from '../pages/Crud';
 import { GamePage } from '../pages/Game';
+import { QuizPage } from '../pages/Quiz';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-
-
 
 export function StackRoutes() {
   return (
@@ -19,6 +18,7 @@ export function StackRoutes() {
       }}
     >
       <Stack.Screen name="Tabs" component={TabsRoutes} />
+      <Stack.Screen name="Quiz" component={QuizPage} />
     </Stack.Navigator>
   );
 }
