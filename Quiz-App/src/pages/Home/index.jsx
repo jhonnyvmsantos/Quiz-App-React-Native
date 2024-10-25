@@ -13,7 +13,9 @@ export function HomePage() {
         <Image style={styles.img} source={require("../../../assets/quiz.png")} />
       </View>
       <View style={styles.content}>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Quiz")}>
+        <TouchableOpacity style={styles.button} onPress={() => {
+          navigation.navigate("Quiz", {redirector: "Home"})
+        }}>
           <Text style={styles.text}>CASUAL</Text>
         </TouchableOpacity>
 
