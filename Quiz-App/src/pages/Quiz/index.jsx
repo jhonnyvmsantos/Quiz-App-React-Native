@@ -3,21 +3,22 @@ import { styles } from './style';
 import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import { QuizAlt } from "../../components/QuizAlt";
 import { db } from "../../database";
-import { random } from "../../components/functions/randomizer";
+import { random } from "../../functions/randomizer";
 
 export function QuizPage({ route }) {
 
+    const [item, setItem] = React.useState([]);
     const [quiz, setQuiz] = React.useState();
     const [alt, setAlt] = React.useState([]);
 
     const getRandomQuizItem = async () => {
-        const dt = await db.getFirstAsync("SELECT * FROM tbl_question ORDER BY RANDOM() LIMIT 1;")
-        setQuiz(dt)
+        const dt = await db.getAllAsync("SELECT * FROM tbl_question ORDER BY RANDOM();")
+        setItem(dt)
+        setQuiz(dt[0])
 
-        const alts = [dt.alt_A, dt.alt_B, dt.alt_C, dt.correctly_alt]
+        const alts = [dt[0].alt_A, dt[0].alt_B, dt[0].alt_C, dt[0].correctly_alt]
         const randomic = await random(alts)
         setAlt(randomic)
-        console.log(randomic)
     };
 
     React.useEffect(() => {
