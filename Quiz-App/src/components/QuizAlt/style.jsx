@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
         width: "100%",
         maxWidth: 400,
         height: 85,
-        padding: 10,
+        paddingHorizontal: 10,
         borderStyle: "solid",
         borderWidth: 1,
         borderRadius: 15,
@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
     content: {
         flex: 1,
         justifyContent: "center",
+        height: "100%"
     },
     button: {
         padding: 12.5,
@@ -24,5 +25,8 @@ export const styles = StyleSheet.create({
         borderLeftWidth: 1,
         justifyContent: "center",
         alignItems: "center"
+    },
+    removed: {
+        backgroundColor: "#CECECE"
     }
 })
