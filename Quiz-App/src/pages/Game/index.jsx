@@ -2,22 +2,24 @@ import * as React from 'react';
 import { styles } from './style';
 import { View, ScrollView } from "react-native";
 import { CardGame } from "../../components/CardGame";
-import { SimpleModal } from '../../components/SimpleModal';
+import { ModeModal } from '../../components/ModeModal';
 
 export function GamePage() {
   const [mVisible, setMVisible] = React.useState(false)
+  const [mSelected, setMSelected] = React.useState(null)
 
-  const mVisibleSwitch = () => {
+  const mVisibleSwitch = (mode) => {
     setMVisible(!mVisible);
+    setMSelected(mode)
   }
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={styles.container} contentContainerStyle={styles.content}>
-      <CardGame pressing={() => mVisibleSwitch()} place="flex-start" img={require("../../../assets/casual.png")} text="CASUAL MODE" />
-      <CardGame pressing={() => mVisibleSwitch()} place="flex-end" img={require("../../../assets/random.png")} text="RANDOM MODE" />
-      <CardGame pressing={() => mVisibleSwitch()} place="flex-start" img={require("../../../assets/hidden.png")} text="HIDDEN MODE" />
+      <CardGame pressing={() => mVisibleSwitch("Default")} place="flex-start" img={require("../../../assets/default.png")} text="DEFAULT MODE" />
+      <CardGame pressing={() => mVisibleSwitch("Infinity")} place="flex-end" img={require("../../../assets/infinity.png")} text="INFINITY MODE" />
+      <CardGame pressing={() => mVisibleSwitch("Hidden")} place="flex-start" img={require("../../../assets/hidden.png")} text="HIDDEN MODE" />
 
-      <SimpleModal close={() => mVisibleSwitch()} visible={mVisible}/>
+      <ModeModal close={() => mVisibleSwitch()} visible={mVisible} mode={mSelected}/>
     </ScrollView>
   );
 }

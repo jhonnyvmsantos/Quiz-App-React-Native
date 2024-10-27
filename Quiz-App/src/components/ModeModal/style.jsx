@@ -38,4 +38,7 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     overflow: "hidden",
   },
+  mode: {
+    width: '100%'
+  }
 });
