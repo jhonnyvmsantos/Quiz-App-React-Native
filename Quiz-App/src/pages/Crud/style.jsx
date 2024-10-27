@@ -47,6 +47,6 @@ export const styles = StyleSheet.create({
     position: "absolute",
     alignSelf: "flex-end",
     right: 10,
-    top: 10
+    top: 10,
   }
 });

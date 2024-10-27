@@ -15,9 +15,9 @@ export function GamePage() {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={styles.container} contentContainerStyle={styles.content}>
-      <CardGame pressing={() => mVisibleSwitch("Default")} place="flex-start" img={require("../../../assets/default.png")} text="DEFAULT MODE" />
-      <CardGame pressing={() => mVisibleSwitch("Infinity")} place="flex-end" img={require("../../../assets/infinity.png")} text="INFINITY MODE" />
-      <CardGame pressing={() => mVisibleSwitch("Hidden")} place="flex-start" img={require("../../../assets/hidden.png")} text="HIDDEN MODE" />
+      <CardGame pressing={() => mVisibleSwitch("DEFAULT")} place="flex-start" img={require("../../../assets/default.png")} text="DEFAULT MODE" />
+      <CardGame pressing={() => mVisibleSwitch("INFINITY")} place="flex-end" img={require("../../../assets/infinity.png")} text="INFINITY MODE" />
+      <CardGame pressing={() => mVisibleSwitch("HIDDEN")} place="flex-start" img={require("../../../assets/hidden.png")} text="HIDDEN MODE" />
 
       <ModeModal close={() => mVisibleSwitch()} visible={mVisible} mode={mSelected}/>
     </ScrollView>

@@ -6,6 +6,18 @@ export const styles = StyleSheet.create({
         backgroundColor: "#fff",
     },
     button: {
-        width: "100%"
+        width: "75%",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingVertical: 10,
+        paddingHorizontal: 5,
+        backgroundColor: "#2196F3",
+        borderRadius: 8,
+        alignSelf: "center",
+        margin: 5
+    },
+    text: {
+        fontWeight: "bold",
+        fontSize: 16
     }
 });

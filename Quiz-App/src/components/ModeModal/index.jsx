@@ -3,6 +3,7 @@ import { styles } from './style';
 import { View, Modal, Text, TouchableOpacity } from "react-native";
 import { db } from '../../database';
 import { InfinityMode } from '../InfinityMode';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 export function ModeModal({ visible, close, mode }) {
 
@@ -10,14 +11,16 @@ export function ModeModal({ visible, close, mode }) {
 
     React.useEffect(() => {
         switch (mode) {
-            case "Infinity":
+            case "INFINITY":
                 const count = db.getFirstSync("SELECT COUNT(id) AS qtd FROM tbl_question;")
                 const collection = (Math.floor(count.qtd / 10))
                 setDisplay(<InfinityMode collection={collection} count={count.qtd} />)
                 break;
-            case "Default":
+            case "DEFAULT":
+                setDisplay(null)
                 break;
-            case "Hidden":
+            case "HIDDEN":
+                setDisplay(null)
                 break;
         }
     }, [mode]);
@@ -32,13 +35,10 @@ export function ModeModal({ visible, close, mode }) {
             >
                 <View style={styles.container}>
                     <View style={styles.content}>
-                        <Text style={styles.text}>Hello World!</Text>
+                        <Text style={styles.title}>{mode} MODE</Text>
                         {display}
-                        <TouchableOpacity
-                            style={styles.button}
-                            onPress={close}
-                        >
-                            <Text numberOfLines={1} style={styles.buttonText}>CLOSE</Text>
+                        <TouchableOpacity style={styles.modalCloseBtn} onPress={close}>
+                            <MaterialCommunityIcons name="close-circle-outline" size={30} color="black" />
                         </TouchableOpacity>
                     </View>
                 </View>

@@ -28,9 +28,11 @@ export const styles = StyleSheet.create({
     elevation: 2,
     backgroundColor: "#2196F3",
   },
-  text: {
+  title: {
     marginBottom: 15,
     textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 18
   },
   buttonText: {
     color: "white",
@@ -38,7 +40,10 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     overflow: "hidden",
   },
-  mode: {
-    width: '100%'
+  modalCloseBtn: {
+    position: "absolute",
+    alignSelf: "flex-end",
+    right: 10,
+    top: 10,
   }
 });
