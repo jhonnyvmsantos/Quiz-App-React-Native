@@ -12,8 +12,12 @@ export function QuizPage({ route }) {
     const [alt, setAlt] = React.useState([]);
     const [choice, setChoice] = React.useState(null);
 
-    const getRandomQuizItem = async () => {
-        const dt = await db.getAllAsync("SELECT * FROM tbl_question ORDER BY RANDOM();")
+    const getQuizItems = async (rnd) => {
+        let op = rnd ? "SELECT * FROM tbl_question ORDER BY RANDOM()" : "SELECT * FROM tbl_question"
+        if (route.params.limited > 0) {
+            op = op + ` LIMIT ${route.params.limited}`
+        }
+        const dt = await db.getAllAsync(op)
         setItems(dt)
         setQuiz(dt[0])
 
@@ -25,7 +29,10 @@ export function QuizPage({ route }) {
     React.useEffect(() => {
         switch (route.params.redirector) {
             case "Home":
-                getRandomQuizItem()
+                getQuizItems(false)
+                break;
+            case "Game":
+                getQuizItems(route.params.mode === "DEFAULT" ? false : true)
                 break;
         }
     }, [route.params.redirector]);

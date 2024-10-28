@@ -14,9 +14,9 @@ export function HomePage() {
       </View>
       <View style={styles.content}>
         <TouchableOpacity style={styles.button} onPress={() => {
-          navigation.navigate("Quiz", {redirector: "Home"})
+          navigation.navigate("Quiz", {redirector: "Home", limited: 0})
         }}>
-          <Text style={styles.text}>CASUAL</Text>
+          <Text style={styles.text}>ALL-ITEMS</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={[styles.button, {backgroundColor: "black"}]}>

@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { styles } from './style';
 import { View, ScrollView } from "react-native";
-import { CardGame } from "../../components/CardGame";
+import { CardMode } from "../../components/CardMode";
 import { ModeModal } from '../../components/ModeModal';
+import { useNavigation } from "@react-navigation/native";
 
 export function GamePage() {
+  const navigation = useNavigation();
+
   const [mVisible, setMVisible] = React.useState(false)
   const [mSelected, setMSelected] = React.useState(null)
 
@@ -15,11 +18,11 @@ export function GamePage() {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={styles.container} contentContainerStyle={styles.content}>
-      <CardGame pressing={() => mVisibleSwitch("DEFAULT")} place="flex-start" img={require("../../../assets/default.png")} text="DEFAULT MODE" />
-      <CardGame pressing={() => mVisibleSwitch("INFINITY")} place="flex-end" img={require("../../../assets/infinity.png")} text="INFINITY MODE" />
-      <CardGame pressing={() => mVisibleSwitch("HIDDEN")} place="flex-start" img={require("../../../assets/hidden.png")} text="HIDDEN MODE" />
+      <CardMode pressing={() => mVisibleSwitch("DEFAULT")} place="flex-start" img={require("../../../assets/default.png")} text="DEFAULT MODE" />
+      <CardMode pressing={() => navigation.navigate("Quiz", {redirector: "Game", mode: "infinity", limited: 0})} place="flex-end" img={require("../../../assets/infinity.png")} text="INFINITY MODE" />
+      <CardMode pressing={() => mVisibleSwitch("HIDDEN")} place="flex-start" img={require("../../../assets/hidden.png")} text="HIDDEN MODE" />
 
-      <ModeModal close={() => mVisibleSwitch()} visible={mVisible} mode={mSelected}/>
+      <ModeModal close={() => mVisibleSwitch(null)} visible={mVisible} mode={mSelected} />
     </ScrollView>
   );
 }
