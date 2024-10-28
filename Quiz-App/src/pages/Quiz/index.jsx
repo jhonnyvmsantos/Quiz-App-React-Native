@@ -7,13 +7,14 @@ import { random } from "../../functions/randomizer";
 
 export function QuizPage({ route }) {
 
-    const [item, setItem] = React.useState([]);
+    const [items, setItems] = React.useState([]);
     const [quiz, setQuiz] = React.useState();
     const [alt, setAlt] = React.useState([]);
+    const [choice, setChoice] = React.useState(null);
 
     const getRandomQuizItem = async () => {
         const dt = await db.getAllAsync("SELECT * FROM tbl_question ORDER BY RANDOM();")
-        setItem(dt)
+        setItems(dt)
         setQuiz(dt[0])
 
         const alts = [dt[0].alt_A, dt[0].alt_B, dt[0].alt_C, dt[0].correctly_alt]
@@ -36,9 +37,12 @@ export function QuizPage({ route }) {
                     <View style={[styles.content, { flex: 0.65, maxHeight: 300 }]}>
                         <Text>{quiz.question_text || ""}</Text>
                     </View>
-                    <View style={[styles.content, { flex: 1, maxHeight: 420 }]}>
+                    <View style={[styles.content, { flex: 1, maxHeight: 515 }]}>
                         <ScrollView VerticalScrollIndicator={false} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={{ flex: 1, width: "100%" }} contentContainerStyle={styles.scrollContent}>
-                            {alt.map((e, i) => <QuizAlt key={i} text={e} />)}
+                            {alt.map((e, i) => <QuizAlt key={i} text={e} choice={i === choice ? true : false} pressing={() => setChoice(i === choice ? null : i)}/>)}
+                            <TouchableOpacity disabled={ choice !== null ? false : true} style={[styles.button, choice === null && styles.disabled]}>
+                                <Text style={styles.text}>CONFIRM</Text>
+                            </TouchableOpacity>
                         </ScrollView>
                     </View>
                 </View>

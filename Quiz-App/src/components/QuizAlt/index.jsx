@@ -3,7 +3,7 @@ import { styles } from './style';
 import { TouchableOpacity, View, Text } from "react-native";
 import Feather from '@expo/vector-icons/Feather';
 
-export function QuizAlt({ text }) {
+export function QuizAlt({ text, pressing, choice }) {
   const [removed, setRemoved] = React.useState(false);
 
   const switchRemoved = () => {
@@ -11,11 +11,11 @@ export function QuizAlt({ text }) {
   }
 
   return (
-    <View style={[styles.container, removed && styles.removed]}>
-      <TouchableOpacity disabled={removed} style={styles.content}>
+    <View style={[styles.container, removed && styles.removed, choice && styles.choice]}>
+      <TouchableOpacity disabled={removed} style={styles.content} onPress={pressing}>
         <Text numberOfLines={2} style={styles.text}>{text}</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={switchRemoved}>
+      <TouchableOpacity disabled={choice} style={styles.button} onPress={switchRemoved}>
         <Feather name="eye-off" size={24} color="black" />
       </TouchableOpacity>
     </View>

@@ -22,5 +22,24 @@ export const styles = StyleSheet.create({
     scrollContent: {
         padding: 10,
         gap: 20,
+    },
+    button: {
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        maxWidth: 400,
+        height: 75,
+        paddingHorizontal: 15,
+        borderRadius: 15,
+        backgroundColor: "#85E85E",
+    },
+    text: {
+        fontWeight: "500",
+        fontSize: 17.5,
+    },
+    disabled: {
+        borderStyle: "solid",
+        borderWidth: 0.5,
+        backgroundColor: "#CECECE"
     }
 })

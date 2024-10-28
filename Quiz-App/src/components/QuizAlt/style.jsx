@@ -19,7 +19,8 @@ export const styles = StyleSheet.create({
         height: "100%"
     },
     button: {
-        padding: 12.5,
+        paddingRight: 10,
+        paddingLeft: 25,
         width: "auto",
         height: '100%',
         borderLeftWidth: 1,
@@ -27,6 +28,9 @@ export const styles = StyleSheet.create({
         alignItems: "center"
     },
     removed: {
-        backgroundColor: "#CECECE"
+        backgroundColor: "#E8E8E8",
+    },
+    choice: {
+        backgroundColor: "#E2EAF4"
     }
 })
