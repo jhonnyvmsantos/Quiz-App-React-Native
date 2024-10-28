@@ -2,8 +2,7 @@ import * as React from 'react';
 import { styles } from './style';
 import { Text, TouchableOpacity, View } from "react-native";
 
-export function InfinityMode({ count, collection }) {
-
+export function ItemCollection({ count, collection }) {
   return (
     <View style={styles.container}>
       {collection >= 1 ? <>

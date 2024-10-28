@@ -2,25 +2,29 @@ import * as React from 'react';
 import { styles } from './style';
 import { View, Modal, Text, TouchableOpacity } from "react-native";
 import { db } from '../../database';
-import { InfinityMode } from '../InfinityMode';
+import { ItemCollection } from '../ItemCollection';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 export function ModeModal({ visible, close, mode }) {
 
     const [display, setDisplay] = React.useState(null)
 
+    const collection = async () => {
+        const count = await db.getFirstAsync("SELECT COUNT(id) AS qtd FROM tbl_question;")
+        const collection = (Math.floor(count.qtd / 10))
+        setDisplay(<ItemCollection collection={collection} count={count.qtd} />)
+    }
+
     React.useEffect(() => {
         switch (mode) {
-            case "INFINITY":
-                const count = db.getFirstSync("SELECT COUNT(id) AS qtd FROM tbl_question;")
-                const collection = (Math.floor(count.qtd / 10))
-                setDisplay(<InfinityMode collection={collection} count={count.qtd} />)
-                break;
             case "DEFAULT":
+                collection();
+                break;
+            case "INFINITY":
                 setDisplay(null)
                 break;
             case "HIDDEN":
-                setDisplay(null)
+                collection();
                 break;
         }
     }, [mode]);
