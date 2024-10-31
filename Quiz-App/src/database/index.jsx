@@ -2,7 +2,12 @@ import * as SQLite from 'expo-sqlite';
 
 export const db = SQLite.openDatabaseSync('quiz.db');
 
-export const playground = async () => {
+export const dropTable = async () => {
+    db.execAsync('DROP TABLE IF EXISTS tbl_question;');
+    console.warn("Table Dropped!")
+}
+
+export const playground = async () => {    
     db.execAsync(`
         CREATE TABLE IF NOT EXISTS tbl_question (
             id INTEGER PRIMARY KEY AUTOINCREMENT,

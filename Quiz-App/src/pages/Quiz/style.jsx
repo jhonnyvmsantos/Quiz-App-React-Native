@@ -41,5 +41,26 @@ export const styles = StyleSheet.create({
         borderStyle: "solid",
         borderWidth: 0.5,
         backgroundColor: "#CECECE"
-    }
+    },
+    finishContent: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 10
+    },
+    title: {
+        fontSize: 16,
+        fontWeight: "600"
+    },
+    elevation: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 9,
+        marginBottom: 15
+    },
 })
