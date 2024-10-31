@@ -95,15 +95,21 @@ export function QuizPage({ route }) {
 
             {next.transfer && (
                 <View style={[styles.container, { justifyContent: "center" }]}>
-                    {next.choice ? <Octicons
+                    {next.choice && route.params.mode !== "HIDDEN" ? <Octicons
                         name="check-circle-fill"
                         size={120}
                         color="green"
-                    /> : <Octicons
-                        name="x-circle-fill"
-                        size={120}
-                        color="red"
-                    />}
+                    /> : <>
+                        {route.params.mode !== "HIDDEN" ? <Octicons
+                            name="x-circle-fill"
+                            size={120}
+                            color="red"
+                        /> : <Octicons
+                            name="question"
+                            size={120}
+                            color="black"
+                        />}
+                    </>}
                 </View>
             )}
 
