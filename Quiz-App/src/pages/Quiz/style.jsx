@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
         height: 75,
         paddingHorizontal: 15,
         borderRadius: 15,
-        backgroundColor: "#85E85E",
+        backgroundColor: "#5DE2E7",
     },
     text: {
         fontWeight: "500",
